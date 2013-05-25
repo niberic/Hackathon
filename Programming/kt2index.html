@@ -1,0 +1,385 @@
+<html>
+<head>
+<title>Knifetank: The Hauntening</title>  
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script type="text/javascript">
+window.scrollTo(0, 1);
+window.onresize = window.scrollTo(0, 1);
+</script>
+
+<div id="player">
+</div>
+
+<script type="text/javascript">
+
+// Figure out which kind of audio file is compatible with this browser.
+var canPlayMp3 = true;
+var myAudio = new Audio();
+canPlayMp3 = ("no" != myAudio.canPlayType("audio/mpeg")) && ("" != myAudio.canPlayType("audio/mpeg"));
+
+
+var MUTED = false;
+
+function playAudio() {
+	var myAudio = document.getElementById('player').getElementsByTagName('audio')[0];
+	myAudio.play();
+}
+function toggleAudio() {
+	
+	var myButton = document.getElementById('mute_button');
+	var myAudio = document.getElementById('player').getElementsByTagName('audio')[0];
+	if (!MUTED) {
+//		myAudio.volume = 0;
+		myAudio.pause();
+		myButton.src = "images/audioOff.png";
+	}
+	else {
+//		myAudio.volume = 1;
+		myAudio.play();
+		myButton.src = "images/audioOn.png";
+	}
+	
+	MUTED = !MUTED;
+}
+
+function changeAudio(source, doplay) {
+		
+	var oldVolume = 1;
+	try{
+		// destroy the original audio tag if it exists
+		var myAudio = document.getElementById('player').getElementsByTagName('audio')[0];
+		if (myAudio)
+			oldVolume = myAudio.volume;
+		
+		document.getElementById('player').removeChild(document.getElementById('player').getElementsByTagName('audio')[0]);
+	}catch(e){}
+
+	// Create the player tags
+	var audioEl = document.createElement('AUDIO');
+	
+	if (canPlayMp3)
+		audioEl.src = source + ".mp3";
+	else
+		audioEl.src = source + ".ogg";
+
+	audioEl.autoplay = false;
+	audioEl.controls = false;
+	
+	// this works on Safari
+	audioEl.onEnded = "this.play();";
+
+	// this works on Firefox
+	audioEl.addEventListener('ended', function() {
+    	this.currentTime = 0;
+	    this.play();
+	}, false);
+
+	audioEl.volume = oldVolume;
+	
+	var myButton = document.getElementById('mute_button');
+	if (audioEl.volume) {
+		myButton.src = "images/audioOn.png";
+	}
+	else {
+		myButton.src = "images/audioOff.png";
+	}
+
+	
+	// Append the audio tag
+	document.getElementById('player').appendChild(audioEl);
+	//audioEl.play();
+	
+	if (doplay)
+		audioEl.play();
+}
+
+</script>
+
+<script type="text/javascript"> 
+    audioHack = function() {
+	var pElement = 	document.getElementById('player').getElementsByTagName('audio')[0];
+
+	//pElement.load();	
+	
+	// this works on Safari
+	pElement.onEnded = "this.play();";
+
+	// this works on Firefox
+	pElement.addEventListener('ended', function() {
+    	this.currentTime = 0;
+	    this.play();
+	}, false);
+
+	pElement.play();
+};
+
+</script> 
+
+
+<SCRIPT TYPE="text/javascript" SRC="gadventure.js">
+<!--
+// JavaScript 'Adventure' style world w/ images
+// Based on Slideshow by Patrick Fitzgerald
+// http://slideshow.barelyfitz.com/
+// -->
+</SCRIPT>
+
+
+<SCRIPT TYPE="text/javascript">	
+<!--
+var gworld;
+gworld = new world();
+gworld.prefetch = 1;
+
+var state;
+state = new statehack();
+
+-->
+
+
+
+</SCRIPT>
+
+<style type="text/css">
+body {
+	margin: 0px;
+	padding: 0px;
+	background: #000;
+	color: #ffffff;
+	font-family: Helvetica, Arial;
+	text-align: center;
+}
+
+#img_div {
+	text-align: center;
+}
+
+#hud_div {
+	margin: 0px auto;
+	height: 36px;
+	width: 960px;
+	
+}
+
+#inventory_div {
+	float: left;
+	text-align: center;
+	height: 36px;
+	padding-left: 20px;
+
+}
+
+#img_and_text {
+	text-align: center;
+	height: 500px;
+	width: 960px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#text_div {
+	top: 0px;
+	width: 950px;
+	text-align: center;
+	position: absolute;
+	background: rgb(21,21,21);
+	background: rgba(21,21,21,0.9);	
+	font-size: 20px;
+	padding: 5px;
+}
+
+#audioCtrl {
+	float: right;
+	padding-right: 20px;	
+}
+</style>
+</head>
+<!--
+<body onload="gworld.restore_position('GW_POSITION');gworld.update();" onunload="gworld.save_position('GW_POSITION');">
+-->
+<body>
+
+<FORM ID="gw_form" NAME="gw_form" ACTION="" METHOD="GET" style="margin:0px; padding:0px;">
+
+<div id="img_and_text">
+	<div id="img_div"><img id="currentImage" name="currentImage" src="cubius.png" border=0 width=960 height=500></div>
+	<div id="text_div">(no text)</div>
+</div>
+
+<div id="hud_div">
+
+    <div id="audioCtrl">
+    <img id="mute_button" src="images/audioOn.png" onClick="toggleAudio();" width=36 height=36 border=0>
+    </div>
+</div>
+
+</FORM>
+
+<!-- Define the scenes as image maps with some bonus fields for inventory and other behaviors -->
+
+<map id="main" name="main" text="">
+   <area shape="rect" 
+            coords="0,0,960,500"
+            onClick="audioHack();gworld.goto_scene('path1');gworld.update();"/>
+
+</map>
+<map id="path1" name="path1" text="School Rules!"></span>
+   <area shape="rect" 
+            coords="0,220,30,280"
+            targetscene="roadleft"/>
+   <area shape="rect" 
+            coords="930,220,960,280"
+            targetscene="roadright"/>
+   <area shape="rect" 
+            coords="150,100,750,440"
+            onClick="state.updateBus();gworld.update();"/>
+</map>
+<map id="bus1" name="bus1" text="It seemed louder here earlier.">
+   <area shape="rect" 
+            coords="0,220,30,280"
+            targetscene="roadleft"/>
+   <area shape="rect" 
+            coords="930,220,960,280"
+            targetscene="roadright"/>
+   <area shape="rect" 
+            coords="150,100,750,440"
+            onClick="state.updateBus1();gworld.update();"/>
+</map>
+<map id="bus2" name="bus2" text="Thank goodness the cops are finally hear to protect you and the kids from that horrible KnifeTank creature..<br>Hopefully they haven't found the burning house yet." >
+   <area shape="rect" 
+            coords="200,120,830,440"
+            targetscene="reveal"/>
+</map>
+<map id="roadleft" name="roadleft" text="You head left down a long, dark road.">
+   <area shape="rect" 
+            coords="0,220,30,280"
+            targetscene="house"/>
+   <area shape="rect" 
+            coords="930,220,960,280"
+            targetscene="bus1"/>
+   <area shape="rect" 
+            coords="0,350,960,500"
+            onClick="state.updateRoad();gworld.update();"/>
+</map>
+<map id="roadright" name="roadright" text="You bank right down a long, dark road.">
+   <area shape="rect" 
+            coords="0,220,30,280"
+            targetscene="bus1"/>
+   <area shape="rect" 
+            coords="930,220,960,280"
+            targetscene="house"/>
+   <area shape="rect" 
+            coords="0,350,960,500"
+            onClick="state.updateRoad();gworld.update();"/>
+</map>	
+
+<map id="house" name="house" text="You see a house in the distance. It looks like it's been vacant for years.">
+   <area shape="rect" 
+            coords="0,220,30,280"
+            targetscene="roadright"/>
+   <area shape="rect" 
+            coords="930,220,960,280"
+            targetscene="roadleft"/>
+   <area shape="rect" 
+            coords="600,50,800,175"
+            targetscene="door"/>
+</map>
+
+
+<map id="living" name="living" text="Smells kind of like...old people.">
+   <area shape="rect" 
+            coords="0,220,30,280"
+            targetscene="entrance"/>
+	<!-- chair -->
+   <area shape="rect" 
+            coords="150,75,360,400"
+            onClick="state.updateDullKnife();gworld.update();"/>
+	<!-- photoalbum -->
+   <area shape="rect" 
+            coords="430,375,600,475"
+            onClick="state.updatePhotoAlbum();gworld.update();"/>
+	<!-- tv -->
+   <area shape="rect" 
+            coords="675,175,960,960"
+            onClick="state.updateTV();gworld.update();"/>
+	<!-- snowglobe -->
+   <area shape="rect" 
+            coords="775,100,825,175"
+            onClick="state.updateSnowglobe();gworld.update();"/>
+
+</map>
+
+
+
+<SCRIPT TYPE="text/javascript">
+<!--
+// Finish defining and activating the world
+
+var maps, i, j, name, text, target, item, cmd, newscene;
+maps = document.getElementsByTagName('Map');
+for (i=0; i < maps.length; ++i) {
+	name = maps[i].getAttribute('name');
+	text = maps[i].getAttribute('text');
+    item = maps[i].getAttribute('inventory');
+    
+    cmd="";
+    if (item) {
+    	cmd = "state.addto_inventory(" + item + ");";
+    }
+
+	exits = new Array();
+	areas = maps[i].getElementsByTagName('area');
+	for (j=0; j < areas.length; ++j) {
+		target = areas[j].getAttribute('targetscene');
+		exits[j] = target;
+		areas[j].setAttribute('onMouseOver', "this.focus();");
+        areas[j].setAttribute('onMouseOut', "this.blur();");
+        
+		if (!areas[j].getAttribute('onClick')){
+			cmd += "gworld.goto_scene(\'" + target + "\');gworld.update();";
+			areas[j].setAttribute('onClick', cmd);
+		}
+	}
+	newscene = new scene(name, text, exits, item);
+	gworld.add_scene(newscene);
+}
+
+
+// If you want some code to be called before or
+// after the slide is updated, define the functions here
+
+gworld.pre_update_hook = function() {
+  return;
+}
+
+gworld.post_update_hook = function() {
+  return;
+}
+if (document.images) {
+
+  // Which image object to use
+  gworld.image = document.images.currentImage;
+  
+  // The ID of the element that will contain the text for the slide
+  gworld.textid = "text_div";
+
+
+  // Update the image and the text
+  gworld.goto_scene("main");
+  gworld.update();
+
+  
+  changeAudio("music/track1",false);
+
+}
+
+//
+-->
+</SCRIPT>
+
+
+</body>
+</html>
