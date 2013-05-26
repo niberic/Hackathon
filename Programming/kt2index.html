@@ -140,6 +140,7 @@ state = new statehack();
 
 
 
+
 </SCRIPT>
 
 <style type="text/css">
@@ -220,98 +221,21 @@ body {
 
 <!-- Define the scenes as image maps with some bonus fields for inventory and other behaviors -->
 
-<map id="main" name="main" text="">
+<map id="path1" name="path1" text="">
    <area shape="rect" 
             coords="0,0,960,500"
-            onClick="audioHack();gworld.goto_scene('path1');gworld.update();"/>
-
+            onClick="audioHack();gworld.goto_scene('classroom');gworld.update();"/>
 </map>
-<map id="path1" name="path1" text="School Rules!"></span>
-   <area shape="rect" 
-            coords="0,220,30,280"
-            targetscene="roadleft"/>
-   <area shape="rect" 
-            coords="930,220,960,280"
-            targetscene="roadright"/>
+
+<!------------ QUESTION! WE ACTUALLY CARE ABOUT THIS!! ---------------->
+
+<map id="classroom" name="classroom" text="School Rules!"></span>
    <area shape="rect" 
             coords="150,100,750,440"
-            onClick="state.updateBus();gworld.update();"/>
-</map>
-<map id="bus1" name="bus1" text="It seemed louder here earlier.">
-   <area shape="rect" 
-            coords="0,220,30,280"
-            targetscene="roadleft"/>
-   <area shape="rect" 
-            coords="930,220,960,280"
-            targetscene="roadright"/>
-   <area shape="rect" 
-            coords="150,100,750,440"
-            onClick="state.updateBus1();gworld.update();"/>
-</map>
-<map id="bus2" name="bus2" text="Thank goodness the cops are finally hear to protect you and the kids from that horrible KnifeTank creature..<br>Hopefully they haven't found the burning house yet." >
-   <area shape="rect" 
-            coords="200,120,830,440"
-            targetscene="reveal"/>
-</map>
-<map id="roadleft" name="roadleft" text="You head left down a long, dark road.">
-   <area shape="rect" 
-            coords="0,220,30,280"
-            targetscene="house"/>
-   <area shape="rect" 
-            coords="930,220,960,280"
-            targetscene="bus1"/>
-   <area shape="rect" 
-            coords="0,350,960,500"
-            onClick="state.updateRoad();gworld.update();"/>
-</map>
-<map id="roadright" name="roadright" text="You bank right down a long, dark road.">
-   <area shape="rect" 
-            coords="0,220,30,280"
-            targetscene="bus1"/>
-   <area shape="rect" 
-            coords="930,220,960,280"
-            targetscene="house"/>
-   <area shape="rect" 
-            coords="0,350,960,500"
-            onClick="state.updateRoad();gworld.update();"/>
-</map>	
-
-<map id="house" name="house" text="You see a house in the distance. It looks like it's been vacant for years.">
-   <area shape="rect" 
-            coords="0,220,30,280"
-            targetscene="roadright"/>
-   <area shape="rect" 
-            coords="930,220,960,280"
-            targetscene="roadleft"/>
-   <area shape="rect" 
-            coords="600,50,800,175"
-            targetscene="door"/>
+            onClick="gworld.goto_scene('path1');gworld.update();"/>
 </map>
 
-
-<map id="living" name="living" text="Smells kind of like...old people.">
-   <area shape="rect" 
-            coords="0,220,30,280"
-            targetscene="entrance"/>
-	<!-- chair -->
-   <area shape="rect" 
-            coords="150,75,360,400"
-            onClick="state.updateDullKnife();gworld.update();"/>
-	<!-- photoalbum -->
-   <area shape="rect" 
-            coords="430,375,600,475"
-            onClick="state.updatePhotoAlbum();gworld.update();"/>
-	<!-- tv -->
-   <area shape="rect" 
-            coords="675,175,960,960"
-            onClick="state.updateTV();gworld.update();"/>
-	<!-- snowglobe -->
-   <area shape="rect" 
-            coords="775,100,825,175"
-            onClick="state.updateSnowglobe();gworld.update();"/>
-
-</map>
-
+<!--------------------------------------------------------------------->
 
 
 <SCRIPT TYPE="text/javascript">
