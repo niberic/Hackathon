@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Knifetank: The Hauntening</title>  
+<title>Work in Progress</title>  
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
@@ -147,7 +147,7 @@ state = new statehack();
 body {
 	margin: 0px;
 	padding: 0px;
-	background: #000;
+	background: #fff;
 	color: #ffffff;
 	font-family: Helvetica, Arial;
 	text-align: center;
@@ -230,10 +230,25 @@ body {
 <!------------ QUESTION! WE ACTUALLY CARE ABOUT THIS!! ---------------->
 
 <map id="classroom" name="classroom" text="School Rules!"></span>
-   <area shape="rect" 
-            coords="150,100,750,440"
+    <!-- Answer 1 -->
+    <area shape="rect" 
+            coords="0,360,240,500"
+            onClick="gworld.goto_scene('path1');gworld.update();"/>
+	<!-- Answer 2 -->
+    <area shape="rect"  
+            coords="240,360,480,500"
+            onClick="gworld.goto_scene('path1');gworld.update();"/>
+    <!-- Answer 3 -->
+    <area shape="rect" 
+            coords="480,360,720,500"
+            onClick="gworld.goto_scene('path1');gworld.update();"/>
+	<!-- Answer 4 -->
+    <area shape="rect" 
+            coords="720,360,960,500"
             onClick="gworld.goto_scene('path1');gworld.update();"/>
 </map>
+
+
 
 <!--------------------------------------------------------------------->
 
